@@ -9,18 +9,22 @@ import GlobalContext from "./context/GlobalContext";
 
 function App() {
   const [currentMonth, setCurrentMonth] = useState(getMonth()); 
-  const { monthIndex } = useContext(GlobalContext);
+  const { monthIndex ,showEventModal} = useContext(GlobalContext);
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex]);
   return (
-    <div className="h-screen flex flex-col">
-      <CalendarHeader />
-      <div className="flex flex-1">
-        <Sidebar />
-        <Month month={currentMonth} /> {/* Corrected variable name: currentMonth */}
+    <React.Fragment>
+      {showEventModal && <EventModal />}
+
+      <div className="h-screen flex flex-col">
+        <CalendarHeader />
+        <div className="flex flex-1">
+          <Sidebar />
+          <Month month={currentMonth} />
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 
