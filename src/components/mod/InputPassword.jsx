@@ -30,7 +30,7 @@ function InputPassword({ label , name , handleChange , values }) {
   />
 </div>
 <div className="form-field-input-container w-full rounded-[6px] h-[38px] bg-[#FFFFFF] border-[1px] border-[#565656] border-opacity-20 flex flex-row justify-center items-center">
-  <div className="form-field-input-icobox bg-[#6c4cb5] h-[38px] w-[38px] rounded-bl-[6px] rounded-tl-[6px] justify-center items-center flex">
+  <div className="form-field-input-icobox bg-[#1D4ED8] h-[38px] w-[38px] rounded-bl-[6px] rounded-tl-[6px] justify-center items-center flex">
     <span className="text-[16px] text-[#ffffff]">
       <FontAwesomeIcon icon={faLock} />
     </span>
@@ -46,14 +46,14 @@ function InputPassword({ label , name , handleChange , values }) {
   <div className="h-[38px] w-[38px] rounded-bl-[6px] rounded-tl-[6px] justify-center items-center flex">
     {passwordVisible ? (
       <span
-        className="text-[16px] text-[#6c4cb5] cursor-pointer"
+        className="text-[16px] text-[#1D4ED8] cursor-pointer"
         onClick={togglePasswordVisibility}
       >
         <FontAwesomeIcon icon={faEye} />
       </span>
     ) : (
       <span
-        className="text-[16px] text-[#6c4cb5] cursor-pointer"
+        className="text-[16px] text-[#1D4ED8] cursor-pointer"
         onClick={togglePasswordVisibility}
       >
         <FontAwesomeIcon icon={faEyeSlash} />

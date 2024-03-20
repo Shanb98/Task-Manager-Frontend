@@ -55,126 +55,120 @@ function Registration() {
 
 
 
-  return (
-    <div className="w-full p-5 h-screen flex justify-center items-center relative ">
-      <Formik
-        initialValues={{
-          firstName:"",
-          lastName:"",
-          email:"",
-          contact:"",
-          userID: "",
-          password: "",
-        }}
-        validationSchema={RegistrationSchema}
-        onSubmit={handleUserRegistration}
-      >
-        {({ errors, touched, handleChange, values }) => (
-          <Form className="flex flex-col lg:w-1/2 md:w-1/2 w-full">
-            <div className="w-1/2 text-center flex justify-center items-center mx-auto flex-col">
-              <h3 className="text-[4rem] text-[#6c4cb5] font-bold">
-                Future Tech
-              </h3>
-              <p>Please register to continue</p>
+return (
+  <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-200 via-blue-300 to-blue-400">
+    <Formik
+      initialValues={{
+        firstName: "",
+        lastName: "",
+        email: "",
+        contact: "",
+        userID: "",
+        password: "",
+      }}
+      validationSchema={RegistrationSchema}
+      onSubmit={handleUserRegistration}
+    >
+      {({ errors, touched, handleChange, values }) => (
+        <Form className="w-full max-w-lg p-8 space-y-6 bg-white rounded-lg shadow-2xl" style={{ marginTop: '20px', marginBottom: '20px' }}>
+          <div className="text-center">
+            <h3 className="text-4xl font-bold text-blue-800 font-pacifico">
+            My Task Manager
+            </h3>
+            <br/>
+            <p className="text-gray-600 font-handwriting text-lg">
+  Welcome aboard! Let's get you all set up. 🚀
+</p>
+
+          </div>
+
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <InputField
+                label="First Name"
+                name="firstName"
+                type="text"
+                placeholder="First Name"
+                handleChange={handleChange}
+                values={values}
+              />
             </div>
-
-            <div className="w-full justify-between flex-row flex space-x-3">
-              <div className="w-1/2">
-                <InputField
-                  label="First Name"
-                  name="firstName"
-                  type="text"
-                  placeholder="First Name"
-                  handleChange={handleChange}
-                  values={values}
-                />
-              </div>
-
-              <div className="w-1/2">
-                <InputField
-                  label="Last Name"
-                  name="lastName"
-                  type="text"
-                  placeholder="Last Name"
-                  handleChange={handleChange}
-                  values={values}
-                />
-              </div>
+            <div className="w-full md:w-1/2 px-3">
+              <InputField
+                label="Last Name"
+                name="lastName"
+                type="text"
+                placeholder="Last Name"
+                handleChange={handleChange}
+                values={values}
+              />
             </div>
+          </div>
 
-
-            <div className="w-full justify-between flex-row flex space-x-3">
-              <div className="w-1/2">
-                <InputField
-                  label="Email"
-                  name="email"
-                  type="text"
-                  placeholder="Email"
-                  handleChange={handleChange}
-                  values={values}
-                />
-              </div>
-
-              <div className="w-1/2">
-                <InputField
-                  label="Contact"
-                  name="contact"
-                  type="text"
-                  placeholder="Contact"
-                  handleChange={handleChange}
-                  values={values}
-                />
-              </div>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <InputField
+                label="Email"
+                name="email"
+                type="email"
+                placeholder="Email"
+                handleChange={handleChange}
+                values={values}
+              />
             </div>
+            <div className="w-full md:w-1/2 px-3">
+              <InputField
+                label="Contact"
+                name="contact"
+                type="text"
+                placeholder="Contact"
+                handleChange={handleChange}
+                values={values}
+              />
+            </div>
+          </div>
 
+          <InputField
+            label="Username"
+            name="userID"
+            type="text"
+            placeholder="Username"
+            handleChange={handleChange}
+            values={values}
+          />
 
+          <InputField
+            label="Password"
+            name="password"
+            type="password"
+            placeholder="Password"
+            handleChange={handleChange}
+            values={values}
+          />
 
-            
-
-            <InputField
-              label="userID"
-              name="userID"
-              type="text"
-              placeholder="UserID"
-              handleChange={handleChange}
-              values={values}
-            />
-
-            <InputField
-              label="Password"
-              name="password"
-              type="password"
-              placeholder="Password"
-              handleChange={handleChange}
-              values={values}
-            />
-
-            <PrimaryButton
+<PrimaryButton
               label="Register"
-              bgcolor="#6c4cb5"
+              bgcolor="#1D4ED8"
               textcolor="#ffffff"
               type="submit"
             />
 
-            <div className="w-full flex flex-row justify-between mt-3">
-              <h5 className="text-[12px]">
-                Already have an account?{" "}
-                <span className="text-[#6c4cb5]">
-                  <Link to="/">Login now</Link>
-                </span>
-              </h5>
-            </div>
+          {successMessage && (
+            <p className="text-sm text-green-600 mt-2">{successMessage}</p>
+          )}
 
-            {successMessage && (
-              <span className="text-green-600 text-[12px] mt-2">{successMessage}</span>
-            )}
+          <div className="text-center text-sm mt-4">
+            Already have an account?{" "}
+            <Link to="/" className="text-[#6c4cb5] hover:underline">
+              Login now
+            </Link>
+          </div>
+        </Form>
+      )}
+    </Formik>
+  </div>
+);
 
-
-          </Form>
-        )}
-      </Formik>
-    </div>
-  );
 }
 
 export default Registration;

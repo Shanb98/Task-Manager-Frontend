@@ -20,8 +20,11 @@ export default {
     extend: {
 
       fontFamily: {
-        sans: ["Open Sans"]
+        sans: ["Open Sans"],
+        pacifico: ['Pacifico', 'cursive'],
+        handwriting: ['"Indie Flower"', 'cursive'],
       },
+      
       gridTemplateColumns: {
         "1/5": "1fr 5fr"
       }

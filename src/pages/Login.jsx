@@ -60,7 +60,7 @@ const Login = () => {
   });
 
   return (
-    <div className="w-full p-5 h-screen flex justify-center items-center relative ">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-200 via-blue-300 to-blue-400">
       <Formik
         initialValues={{
           userID: "",
@@ -70,76 +70,55 @@ const Login = () => {
         onSubmit={handleLogin}
       >
         {({ errors, touched, handleChange, values }) => (
-          <Form className="flex flex-col lg:w-1/2 md:w-1/2 w-full">
-            
-          <div className="w-1/2 mx-auto flex items-center justify-center">
-            <img src="logo" alt="Your Photo" className="mr-4" />
-            <h3 className="text-4xl text-[#6c4cb5] font-bold">My Task Manager</h3>
-          </div>
-
-           
-
-<InputField 
-label="username"
-name="userID"
-type="text"
-placeholder="Username"
-handleChange={handleChange}
-values={values}
-/>
-
-
-
-<InputPassword
-label="Password"
-name="password"
-handleChange={handleChange}
-values={values}
-/>
-
-<PrimaryButton
-label="Login"
-bgcolor="#6c4cb5"
-textcolor="#ffffff"
-type="submit"
-/>
-
-{loginError && <p className="text-red-600 text-[12px]">{loginError}</p>}
-
-<div className="w-full flex flex-row justify-between mt-3">
-<h5 className="text-[12px]">
-    Don't have an account? {" "}
-    <span className="text-[#6c4cb5]">
-
-        <Link to="/Registration">
-         Register Now
-        </Link>
-
-    </span>
-</h5>
-
-
-<h5 className="text-[12px]">
-   
-    <span className="text-[#6c4cb5]">
-Forgot Password?
-
-    </span>
-</h5>
-
-
-</div>
-           
-
-           
-
-
-
+          <Form className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-2xl">
+            <div className="flex flex-col items-center">
+              <img src={logo} alt="Logo" className="h-24 w-24" />
+              <br/>     
+              <h2 className="text-4xl font-bold text-blue-800 font-pacifico">My Task Manager</h2>
+            </div>
+  
+            <InputField 
+              label="Username"
+              name="userID"
+              type="text"
+              placeholder="Enter your username"
+              handleChange={handleChange}
+              values={values}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            />
+  
+            <InputPassword
+              label="Password"
+              name="password"
+              placeholder="Enter your password"
+              handleChange={handleChange}
+              values={values}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            />
+  
+            <PrimaryButton
+              label="Login"
+              bgcolor="#1D4ED8"
+              textcolor="#ffffff"
+              type="submit"
+            />
+  
+            {loginError && <p className="text-sm text-red-600">{loginError}</p>}
+  
+            <div className="flex items-center justify-between">
+              <Link to="/Registration" className="text-sm text-blue-700 hover:underline">
+                Register Now
+              </Link>
+              <a href="#" className="text-sm text-blue-700 hover:underline">
+                Forgot Password?
+              </a>
+            </div>
           </Form>
         )}
       </Formik>
     </div>
   );
+  
 };
 
 export default Login;
