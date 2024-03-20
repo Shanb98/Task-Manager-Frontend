@@ -26,7 +26,7 @@ export default function CalenderHeader() {
       </h1>
       <button
         onClick={handleReset}
-        className="border rounded py-2 px-4 mr-5"
+        className="border bg-blue-500 text-white rounded py-2 px-4 mr-5"
       >
         Today
       </button>

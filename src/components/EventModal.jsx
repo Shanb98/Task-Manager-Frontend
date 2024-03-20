@@ -2,12 +2,9 @@ import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 
 const labelsClasses = [
-  "indigo",
-  "gray",
-  "green",
-  "blue",
   "red",
-  "purple",
+  "orange",
+  "green",
 ];
 
 export default function EventModal() {
@@ -91,7 +88,7 @@ export default function EventModal() {
             <span className="material-icons-outlined text-gray-400">
               schedule
             </span>
-            <p>{daySelected.format("dddd, MMMM DD")}</p>
+            <p className="text-left pl-2">{daySelected.format("dddd, MMMM DD")}</p>
             <span className="material-icons-outlined text-gray-400">
               segment
             </span>
