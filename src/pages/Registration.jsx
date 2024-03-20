@@ -3,6 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "../components/mod/InputField";
+import SelectField from "../components/mod/SelectField";
 import PrimaryButton from "../components/mod/PrimaryButton";
 import config from "../config";
 import axios from "axios";
@@ -16,7 +17,7 @@ function Registration() {
     firstName: Yup.string().required("Required"),
     lastName: Yup.string().required("Required"),
     email: Yup.string().email().required("Required"),
-    contact: Yup.string().required("Required"),
+    user: Yup.string().required("Required"),
     userID: Yup.string()
       .matches(/[0-9]/, "Password requires a number")
       .matches(/[a-z]/, "Password requires a lowercase letter")
@@ -62,7 +63,7 @@ return (
         firstName: "",
         lastName: "",
         email: "",
-        contact: "",
+        user: "",
         userID: "",
         password: "",
       }}
@@ -77,8 +78,8 @@ return (
             </h3>
             <br/>
             <p className="text-gray-600 font-handwriting text-lg">
-  Welcome aboard! Let's get you all set up. 🚀
-</p>
+              Welcome aboard! Let's get you all set up. 🚀
+            </p>
 
           </div>
 
@@ -117,12 +118,13 @@ return (
               />
             </div>
             <div className="w-full md:w-1/2 px-3">
-              <InputField
-                label="Contact"
-                name="contact"
-                type="text"
-                placeholder="Contact"
+              <SelectField
+                label="Select User"
+                name='user'
+                icon="Person"
+                boxcolor="transparent"
                 handleChange={handleChange}
+                options={["Admin", "Regular"]}
                 values={values}
               />
             </div>
@@ -146,12 +148,12 @@ return (
             values={values}
           />
 
-<PrimaryButton
-              label="Register"
-              bgcolor="#1D4ED8"
-              textcolor="#ffffff"
-              type="submit"
-            />
+          <PrimaryButton
+            label="Register"
+            bgcolor="#1D4ED8"
+            textcolor="#ffffff"
+            type="submit"
+          />
 
           {successMessage && (
             <p className="text-sm text-green-600 mt-2">{successMessage}</p>
