@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
-import "./App.css";
-import { getMonth } from "./util";
-import CalendarHeader from "./components/CalenderHeader"; 
-import Sidebar from "./components/Sidebar";
-import Month from "./components/Month";
-import GlobalContext from "./context/GlobalContext";
-import EventModal from "./components/EventModal";
-function App() {
+import "../App.css";
+import { getMonth } from "../util.js";
+import CalendarHeader from "../components/CalenderHeader.jsx";
+import Sidebar from "../components/Sidebar";
+import Month from "../components/Month";
+import GlobalContext from "../context/GlobalContext";
+import EventModal from "../components/EventModal";
+function Home() {
   const [currenMonth, setCurrentMonth] = useState(getMonth());
   const { monthIndex, showEventModal } = useContext(GlobalContext);
 
@@ -29,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
