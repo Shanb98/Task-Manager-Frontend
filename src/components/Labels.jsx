@@ -5,8 +5,6 @@ const colorDisplayNames = {
     red: "High Priority",
     green:"Not Urgent",
     orange: "Medium Priority",
-
-
   };
   
   export default function Labels() {

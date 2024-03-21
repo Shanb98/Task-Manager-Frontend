@@ -1,5 +1,8 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
+import Cookies from 'js-cookie';
+import axios from 'axios';
+
 
 const labelsClasses = [
   "red",
@@ -36,6 +39,33 @@ export default function EventModal() {
       day: daySelected.valueOf(),
       id: selectedEvent ? selectedEvent.id : Date.now(),
     };
+
+    const jwtToken = Cookies.get('jwtToken');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    };
+    axios.patch('http://localhost:5001/api/users/update', calendarEvent, config)
+    .then(response => {
+      console.log('Response:', response.data);
+
+      // Dispatch the appropriate action based on the response
+      if (selectedEvent) {
+        dispatchCalEvent({ type: "update", payload: calendarEvent });
+      } else {
+        dispatchCalEvent({ type: "push", payload: calendarEvent });
+      }
+
+      // Close the modal
+      setShowEventModal(false);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Handle errors as needed
+    });
+    console.log('Calendar Event:', calendarEvent);
+
     if (selectedEvent) {
       dispatchCalEvent({ type: "update", payload: calendarEvent });
     } else {
