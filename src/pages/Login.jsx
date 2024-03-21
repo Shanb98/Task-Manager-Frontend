@@ -8,6 +8,8 @@ import axios from 'axios';
 import config from "../config";
 import InputPassword from "../components/mod/InputPassword";
 import logo from "../assets/logo.jpeg";
+import Cookies from 'js-cookie';
+
 const Login = () => {
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState(null);
@@ -16,13 +18,22 @@ const Login = () => {
 
   const handleLogin = async (values) => {
     try {
-      const response = await axios.post(`${config.baseUrl}/userLogin`, values);
 
-      const token = response.data.token;
-
-      // Save the token in localStorage
-      localStorage.setItem('token', token);
-      console.log('Auth Token', token)
+      const response = await axios.post('http://localhost:5001/api/users/login', {
+        username: values.userID,
+        password: values.password,
+      });
+  
+      // Extract the JWT token from the response
+      const jwtToken = response.data.accessToken;
+  
+      // Log the user
+      console.log('Logged in user:', values.username);
+  
+      // Log the JWT token
+      console.log('JWT Token:', jwtToken);
+  
+      Cookies.set('jwtToken', jwtToken);
 
       // Set a timer to remove the token from localStorage after 10 minutes
       setTimeout(() => {
@@ -30,7 +41,7 @@ const Login = () => {
       }, 10 * 60 * 1000); // 10 minutes in milliseconds
 
       // Redirect to the home page or perform other actions
-      navigate("/");
+      navigate("/Home");
     } catch (error) {
       if (error.response.status === 401) {
         // Check the error response for the specific error messages
@@ -52,10 +63,10 @@ const Login = () => {
     .required("Required"),
     password: Yup.string()
       .min(6, "Password must be at least 6 characters")
-      .matches(/[0-9]/, "Password requires a number")
-      .matches(/[a-z]/, "Password requires a lowercase letter")
-      .matches(/[A-Z]/, "Password requires a uppercase letter")
-      .matches(/[^\w]/, "Password requires a symbol")
+  //    .matches(/[0-9]/, "Password requires a number")
+    //  .matches(/[a-z]/, "Password requires a lowercase letter")
+    //  .matches(/[A-Z]/, "Password requires a uppercase letter")
+     // .matches(/[^\w]/, "Password requires a symbol")
       .required("Required"),
   });
 
