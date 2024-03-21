@@ -35,12 +35,6 @@ const Login = () => {
   
       Cookies.set('jwtToken', jwtToken);
 
-      // Set a timer to remove the token from localStorage after 10 minutes
-      setTimeout(() => {
-        localStorage.removeItem('token');
-      }, 10 * 60 * 1000); // 10 minutes in milliseconds
-
-      // Redirect to the home page or perform other actions
       navigate("/Home");
     } catch (error) {
       if (error.response.status === 401) {
@@ -63,10 +57,10 @@ const Login = () => {
     .required("Required"),
     password: Yup.string()
       .min(6, "Password must be at least 6 characters")
-  //    .matches(/[0-9]/, "Password requires a number")
-    //  .matches(/[a-z]/, "Password requires a lowercase letter")
-    //  .matches(/[A-Z]/, "Password requires a uppercase letter")
-     // .matches(/[^\w]/, "Password requires a symbol")
+      .matches(/[0-9]/, "Password requires a number")
+      .matches(/[a-z]/, "Password requires a lowercase letter")
+      .matches(/[A-Z]/, "Password requires a uppercase letter")
+      .matches(/[^\w]/, "Password requires a symbol")
       .required("Required"),
   });
 
