@@ -1,29 +1,57 @@
 import dayjs from "dayjs";
 import React, { useContext, useState, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Day({ day, rowIdx }) {
   const [dayEvents, setDayEvents] = useState([]);
   const {
     setDaySelected,
     setShowEventModal,
-    filteredEvents,
     setSelectedEvent,
   } = useContext(GlobalContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const events = filteredEvents.filter(
-      (evt) =>
-        dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
-    );
-    setDayEvents(events);
-  }, [filteredEvents, day]);
+
+    async function fetchData() {
+      const jwtToken = Cookies.get('jwtToken');
+      try {
+        const response = await axios.get('http://localhost:5001/api/users/getdata', {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        });
+        console.log(response.data);
+        return response.data;
+        
+      } catch (error) {
+        console.error('Failed to fetch events:', error);
+
+        return [];
+
+
+      }
+    }
+
+    async function updateDayEvents() {
+      const data = await fetchData();
+      // Filter events for the current day
+      const eventsForDay = data.filter(event => dayjs(event.day).isSame(day, 'day'));
+      setDayEvents(eventsForDay);
+    }
+
+    updateDayEvents();
+  }, [day]);
 
   function getCurrentDayClass() {
     return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
       ? "bg-blue-600 text-white rounded-full w-7"
       : "";
   }
+
   return (
     <div className="border border-gray-200 flex flex-col">
       <header className="flex flex-col items-center">
@@ -45,6 +73,7 @@ export default function Day({ day, rowIdx }) {
           setShowEventModal(true);
         }}
       >
+        {/* Render events for the current day */}
         {dayEvents.map((evt, idx) => (
           <div
             key={idx}

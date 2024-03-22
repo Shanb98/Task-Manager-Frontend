@@ -50,12 +50,7 @@ export default function EventModal() {
     .then(response => {
       console.log('Response:', response.data);
 
-      // Dispatch the appropriate action based on the response
-      if (selectedEvent) {
-        dispatchCalEvent({ type: "update", payload: calendarEvent });
-      } else {
-        dispatchCalEvent({ type: "push", payload: calendarEvent });
-      }
+
 
       // Close the modal
       setShowEventModal(false);
@@ -73,6 +68,7 @@ export default function EventModal() {
     }
 
     setShowEventModal(false);
+    window.location.reload();
   }
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
